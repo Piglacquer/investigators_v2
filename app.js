@@ -6,7 +6,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const path = require('path')
 
-var stripe = require('stripe')('sk_test_KYERGjm0nYSZEw8YoCkmhLJT')
+var stripe = require('stripe')(process.env.API_KEY)
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.set('views', path.join(__dirname, 'views'))
@@ -26,9 +26,8 @@ app.post('/charge', (request, response) => {
 	if (response.error) {
 		response.render('error')
 	} else {
-		response.render('success')
+		response.render('success', request.body)
 	}
-	// console.log(response)
 })
 
 app.listen(process.env.PORT || 3000)
