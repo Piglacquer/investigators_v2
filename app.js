@@ -33,9 +33,6 @@ app.post('/charge', (request, response) => {
 app.listen(process.env.PORT || 3000)
 
 function createCharge(amount, token) {
-	// Token is created using Checkout or Elements!
-	// Get the payment token ID submitted by the form:
-	// Charge the user's card:
 	stripe.charges.create(
 		{
 			amount: amount,
@@ -45,7 +42,6 @@ function createCharge(amount, token) {
 		},
 		function(err, charge) {
 			console.log(charge)
-			// asynchronously called
 		}
 	)
 }
